@@ -36,6 +36,14 @@ public class HouseController {
         return house;
     }
 
+    @PutMapping("/update/{id}")
+    public House updateHouse(@PathVariable("id") ObjectId id, @Valid @RequestBody House house, HttpServletResponse response) {
+        house.set_id(id);
+        repository.save(house);
+        response.setStatus(HttpServletResponse.SC_OK);
+        return house;
+    }
+
     @DeleteMapping("/delete/{name}")
     public void deleteHouse(@PathVariable("name") String name, HttpServletResponse response) {
         repository.delete(repository.findHouseByName(name));
